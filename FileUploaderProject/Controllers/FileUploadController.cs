@@ -15,11 +15,18 @@ namespace FileUploaderProject.Controllers
         {
             _fileUploadService = new FileUploadService(env); // Pass the IWebHostEnvironment parameter to the constructor
         }
-        [HttpPost]
+        /*[HttpPost]
         public async Task<FileUploadResponse> UploadFiles(List<IFormFile> files)
         {
             List<Document> documents = new List<Document> { new Document { DocumentType = DocumentType.Identification, Files = files }, new Document { DocumentType = DocumentType.Disability, Files = files } };
             FileUploadRequest request = new FileUploadRequest { Documents = documents };
+            FileUploadResponse response = await _fileUploadService.UploadFiles(request);
+            return response;
+        }*/
+
+        [HttpPost]
+        public async Task<FileUploadResponse> UploadFiles([FromForm]FileUploadRequest request)
+        { 
             FileUploadResponse response = await _fileUploadService.UploadFiles(request);
             return response;
         }
